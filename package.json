@@ -1,6 +1,6 @@
 {
-    "name": "newproject",
-    "description": "just to test",
+    "name": "LandscapeAutomatedPlanningPrototype",
+    "description": "A prototype of the landscape architetct workbench. The main purpose is to help choose small architectural forms for yard territories in large cities, according to current demography, standards and budget limits",
     "version": "0.0.1",
     "dependencies": {},
     "node-red": {

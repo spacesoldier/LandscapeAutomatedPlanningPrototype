@@ -1,9 +1,3 @@
-newproject
-==========
+# LandscapeAutomatedPlanningPrototype
+A prototype of the landscape architect workbench. The main purpose is to help choose small architectural forms for yard territories in large cities, according to current demography, standards and budget limits
 
-just to test
-
-### About
-
-This is your project's README.md file. It helps users understand what your
-project does, how to use it and anything else they may need to know.

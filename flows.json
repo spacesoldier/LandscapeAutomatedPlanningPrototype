@@ -12,11 +12,11 @@
         "type": "http in",
         "z": "bbd26c053de1521f",
         "name": "",
-        "url": "/sayhi",
+        "url": "/api/sayhi",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 140,
+        "x": 150,
         "y": 120,
         "wires": [
             [
@@ -71,5 +71,228 @@
                 "a3cd6969b2f51d4e"
             ]
         ]
+    },
+    {
+        "id": "c7741fa4988a9922",
+        "type": "auth-oidc",
+        "z": "bbd26c053de1521f",
+        "name": "",
+        "discovery": "https://auth.simplizio.com/realms/landscapes/.well-known/openid-configuration",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "c5741fd2ae204cdf",
+                "ecb4533d06a2b46c"
+            ]
+        ]
+    },
+    {
+        "id": "11068602c8a53cd4",
+        "type": "http in",
+        "z": "bbd26c053de1521f",
+        "name": "",
+        "url": "/api/sauce",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "c7741fa4988a9922",
+                "6d70c85c7600a139"
+            ]
+        ]
+    },
+    {
+        "id": "5ce14ac528092a62",
+        "type": "function",
+        "z": "bbd26c053de1521f",
+        "name": "function 2",
+        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\n\nlet recipes = [\n    \".... aaargh!\",\n    \"ketchup\",\n    \"i forgot\",\n    \"mayonese\"\n];\n\n\nlet recipe = recipes[getRandomInt(recipes.length)];\n\nmsg.payload = \"Secret sauce recipe: \"+recipe;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 360,
+        "wires": [
+            [
+                "78c69acdd33f144d",
+                "203ee1fd16156297"
+            ]
+        ]
+    },
+    {
+        "id": "017d7f012959f282",
+        "type": "http response",
+        "z": "bbd26c053de1521f",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c5741fd2ae204cdf",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "78c69acdd33f144d",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f319c467b0b47c1f",
+        "type": "function",
+        "z": "bbd26c053de1521f",
+        "name": "function 3",
+        "func": "msg.payload = \"No recipe, dude!\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 260,
+        "wires": [
+            [
+                "bb895795c59b8215",
+                "017d7f012959f282"
+            ]
+        ]
+    },
+    {
+        "id": "6d70c85c7600a139",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 140,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "bb895795c59b8215",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ecb4533d06a2b46c",
+        "type": "function",
+        "z": "bbd26c053de1521f",
+        "name": "function 4",
+        "func": "\nif (msg.error !== undefined){\n    node.send([msg, null]);\n} else {\n    node.send([null, msg]);\n}\n    \n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "f319c467b0b47c1f",
+                "b5c96bc5ac94f8e4"
+            ],
+            [
+                "5ce14ac528092a62",
+                "311c21246460ea2d"
+            ]
+        ]
+    },
+    {
+        "id": "311c21246460ea2d",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b5c96bc5ac94f8e4",
+        "type": "debug",
+        "z": "bbd26c053de1521f",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "203ee1fd16156297",
+        "type": "http response",
+        "z": "bbd26c053de1521f",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 360,
+        "wires": []
     }
 ]
